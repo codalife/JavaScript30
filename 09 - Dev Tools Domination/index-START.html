@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Console Tricks!</title>
 </head>
+
 <body>
 
   <p onClick="makeGreen()">×BREAK×DOWN×</p>
@@ -30,17 +32,40 @@
     // Info
 
     // Testing
+    console.assert("a" === "b", "That's not true")
 
     // clearing
+    console.clear();
 
     // Viewing DOM Elements
+    const test = document.querySelector('p');
+
+    console.dir(test);
 
     // Grouping together
+    dogs.forEach(dog => {
+      console.groupCollapsed(`${dog.name}`)
+      console.log(`${dog.age}`);
+      console.log(`${dog.name}`);
+      console.groupEnd(`${dog.name}`);
+
+    })
 
     // counting
 
+    console.count('Anuar')
+    console.count('Anuar')
+    console.count('Anuar')
+    console.count('Anuar')
+
     // timing
+    console.time('timer');
+    fetch('https://api.github.com/users/octocat/orgs')
+      .then(data => data.json())
+      .then(d => console.timeEnd('timer'));
+
 
   </script>
 </body>
+
 </html>
