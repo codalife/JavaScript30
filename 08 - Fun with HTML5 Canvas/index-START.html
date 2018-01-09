@@ -1,19 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>HTML5 Canvas</title>
 </head>
-<body>
-<canvas id="draw" width="800" height="800"></canvas>
-<script>
-</script>
 
-<style>
-  html, body {
-    margin:0;
-  }
-</style>
+<body>
+  <canvas id="draw" width="800" height="800"></canvas>
+  <script>
+    const canvas = document.querySelector('#draw');
+    const context = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    context.strokeStyle = "#BADA55";
+
+    context.lineJoin = 'round';
+    context.lineCap = 'round';
+
+    let lastX = 0;
+    let lastY = 0;
+    let isDrawing = false;
+
+    const followMouse = e => {
+      if (isDrawing) {
+        console.log(e)
+        context.beginPath();
+        context.moveTo(lastX, lastY);
+        context.lineTo(e.offsetX, e.offsetY);
+        context.stroke();
+        [lastX, lastY] = [e.offsetX, e.offsetY];
+      }
+    }
+
+    canvas.addEventListener('mousemove', followMouse)
+
+    canvas.addEventListener('mousedown', e => {
+      [lastX, lastY] = [e.offsetX, e.offsetY];
+      isDrawing = true
+    });
+    canvas.addEventListener('mouseup', () => isDrawing = false);
+
+
+  </script>
+
+  <style>
+    html,
+    body {
+      margin: 0;
+    }
+  </style>
 
 </body>
+
 </html>
